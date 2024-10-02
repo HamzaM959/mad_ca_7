@@ -21,7 +21,7 @@ class FadingTextAnimation extends StatefulWidget {
 class _FadingTextAnimationState extends State<FadingTextAnimation> {
   bool _isVisible = true;
   double _rotationAngle = 0.0; // Initial rotation angle
-  
+
   void toggleVisibility() {
     setState(() {
       _isVisible = !_isVisible;
@@ -55,10 +55,13 @@ class _FadingTextAnimationState extends State<FadingTextAnimation> {
             AnimatedRotation(
               turns: _rotationAngle,
               duration: const Duration(seconds: 1),
-              child: Image.network(
-                'assets/Afghan_Hound.jpg',
-                width: 100,
-                height: 100,
+              child: ClipOval(
+                child: Image.network(
+                  'assets/Afghan_Hound.jpg',
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ],
