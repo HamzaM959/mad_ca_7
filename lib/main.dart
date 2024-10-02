@@ -20,10 +20,12 @@ class FadingTextAnimation extends StatefulWidget {
 
 class _FadingTextAnimationState extends State<FadingTextAnimation> {
   bool _isVisible = true;
+  double _rotationAngle = 0.0; // Initial rotation angle
   
   void toggleVisibility() {
     setState(() {
       _isVisible = !_isVisible;
+      _rotationAngle += 1.0; // Rotate 1 full turn (360 degrees) on each toggle
     });
   }
 
@@ -31,20 +33,35 @@ class _FadingTextAnimationState extends State<FadingTextAnimation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fading Text Animation'),
+        title: Text('MAD Activity 6'),
       ),
       body: Center(
-        child: GestureDetector(
-          onTap: toggleVisibility,
-          child: AnimatedOpacity(
-            opacity: _isVisible ? 1.0 : 0.0,
-            duration: const Duration(seconds: 1),
-            curve: Curves.easeInOut,
-            child: const Text(
-              'Hello, Flutter!',
-              style: TextStyle(fontSize: 24),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GestureDetector(
+              onTap: toggleVisibility,
+              child: AnimatedOpacity(
+                opacity: _isVisible ? 1.0 : 0.0,
+                duration: const Duration(seconds: 1),
+                curve: Curves.easeInOut,
+                child: const Text(
+                  'Hello, Flutter!',
+                  style: TextStyle(fontSize: 24),
+                ),
+              ),
             ),
-          ),
+            const SizedBox(height: 20),
+            AnimatedRotation(
+              turns: _rotationAngle,
+              duration: const Duration(seconds: 1),
+              child: Image.network(
+                'assets/Afghan_Hound.jpg',
+                width: 100,
+                height: 100,
+              ),
+            ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
